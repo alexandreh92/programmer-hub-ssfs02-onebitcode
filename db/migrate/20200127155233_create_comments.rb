@@ -6,14 +6,13 @@ class CreateComments < ActiveRecord::Migration[5.2]
       t.string :title, limit: 50, default: ''
       t.text :comment
       t.references :commentable, polymorphic: true
-      t.references :user
+      t.references :user, foreign_key: true
       t.string :role, default: 'comments'
       t.timestamps
     end
 
     add_index :comments, :commentable_type
     add_index :comments, :commentable_id
-    add_index :comments, :user_id
   end
 
   def self.down
